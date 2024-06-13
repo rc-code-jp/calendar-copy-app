@@ -1,0 +1,28 @@
+# NOTE:
+# GithubでSetting/Actions/Allowのから
+# - GitHub Actions to create and approve pull requests
+# - Read and write permissions
+# の権限が必要
+# ...
+
+name: github pages
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
