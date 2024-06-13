@@ -37,6 +37,11 @@ window.onload = function() {
   // チェックした日付を表示
   $calendar.addEventListener('change', function() {
     const checkedDays = Array.from(document.querySelectorAll('input[name="day"]:checked')).map(day => day.value);
+
+    // 昇順にソート
+    checkedDays.sort();
+
+    // 表示する
     $output.textContent = checkedDays.join('\n');
 
     // コピーする
