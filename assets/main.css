@@ -1,0 +1,56 @@
+.wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0 auto;
+  width: 1024px;
+}
+
+#output-wrapper {
+  margin: 2em;
+}
+
+#output {
+  width: 100%;
+  min-height: 200px;
+  display: block;
+  white-space: pre-wrap;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+}
+
+#try-area {
+  width: 100%;
+  min-height: 200px;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  outline: none;
+  resize: vertical;
+}
+
+#calendar {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1em;
+}
+
+#calendar h3 {
+  margin: 0.2em;
+}
+
+.calendar-day-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.calendar-day-list label {
+  display: block;
+  padding: 0.2em;
+  font-size: 15px;
+}
+
+.calendar-day-list label:hover {
+  background-color: #f0f0f0;
+}
