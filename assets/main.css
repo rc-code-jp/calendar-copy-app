@@ -54,3 +54,15 @@
 .calendar-day-list label:hover {
   background-color: #f0f0f0;
 }
+
+.calendar-day-list label input:checked + span {
+  opacity: 0.3;
+}
+
+.calendar-day-list .week-0 {
+  color: #e93b3b;
+}
+
+.calendar-day-list .week-6 {
+  color: #3643d6;
+}

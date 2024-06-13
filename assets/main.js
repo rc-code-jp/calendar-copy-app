@@ -4,11 +4,11 @@ const $calendar = document.querySelector('#calendar');
 const $output = document.querySelector('#output');
 
 window.onload = function() {
-  const days = getDays();
+  const dateArray = getDayArray();
 
-  // 日付の先頭7文字をキーにして2重配列にする
-  const daysMap = days.reduce((acc, day) => {
-    const key = day.slice(0, 7);
+  // 年月をキーにして2重配列にする
+  const dateArrayMap = dateArray.reduce((acc, day) => {
+    const key = day.getFullYear() + '年' + (day.getMonth() + 1) + '月';
     if (!acc[key]) {
       acc[key] = [];
     }
@@ -16,18 +16,22 @@ window.onload = function() {
     return acc;
   }, {});
 
+
   // カレンダー表示
-  $calendar.innerHTML = Object.keys(daysMap).map(key => {
+  $calendar.innerHTML = Object.keys(dateArrayMap).map(key => {
     return `
       <div class="calendar-month">
         <h3>${key}</h3>
         <ul class="calendar-day-list">
-          ${daysMap[key].map(day => `<li>
-            <label>
-              <input type="checkbox" name="day" value="${day}">
-              <span>${day}</span>
-            </label>
-          </li>`).join('')}
+          ${dateArrayMap[key].map(date => {
+            const value = formatDate(date);
+            return `<li class="week-${date.getDay()}">
+              <label>
+                <input type="checkbox" name="day" value="${value}">
+                <span>${value}</span>
+              </label>
+            </li>`;
+          }).join('')}
         </ul>
       </div>
     `;
@@ -55,7 +59,7 @@ window.onload = function() {
 }
 
 // 日付を取得
-const getDays = function () {
+const getDayArray = function () {
   // 今月の1日から3ヶ月分の日付の一覧を取得
   const now = new Date();
   const year = now.getFullYear();
@@ -64,13 +68,17 @@ const getDays = function () {
   const lastDay = new Date(year, month + 3, 0);
   const days = [];
   for (let i = firstDay; i <= lastDay; i.setDate(i.getDate() + 1)) {
-    // 日付はYYYY/MM/DD（曜日）の形式で取得
     const date = new Date(i);
-    const dayNumber = date.getDay();
-    // 日付が1桁の場合は0埋めする
-    const m = ('0' +(date.getMonth() + 1)).slice(-2);
-    const d = ('0' + date.getDate()).slice(-2);
-    days.push(date.getFullYear() + '/' + m + '/' + d + '（' + weeks[dayNumber] + '）');
+    days.push(date);
   }
   return days;
 } 
+
+// 日付はYYYY/MM/DD（曜日）の形式で返す
+const formatDate = function (date) {
+  const weekNumber = date.getDay();
+  // 日付が1桁の場合は0埋めする
+  const m = ('0' +(date.getMonth() + 1)).slice(-2);
+  const d = ('0' + date.getDate()).slice(-2);
+  return date.getFullYear() + '/' + m + '/' + d + '（' + weeks[weekNumber] + '）'
+}
