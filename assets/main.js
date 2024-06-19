@@ -1,6 +1,7 @@
 const weeks = ['日', '月', '火', '水', '木', '金', '土']
 
 const $calendar = document.querySelector('#calendar');
+const $timeList = document.querySelector('#time-list');
 const $output = document.querySelector('#output');
 
 window.onload = function() {
@@ -38,6 +39,23 @@ window.onload = function() {
   }
   ).join('');
 
+  // 時間をリスト形式で表示
+  const hours = getHourArray();
+  let timeListStr = '<ul class="hour-list">';
+  hours.forEach(hour => {
+    timeListStr += `<li>${hour}</li>`;
+  });
+  timeListStr += '</ul>';
+
+  const minutes = getMinuteArray();
+  timeListStr += '<ul class="minute-list">';
+  minutes.forEach(minute => {
+    timeListStr += `<li>${minute}</li>`;
+  });
+  timeListStr += '</ul>';
+
+  $timeList.innerHTML = timeListStr;
+
   // チェックした日付を表示
   $calendar.addEventListener('change', function() {
     const checkedDays = Array.from(document.querySelectorAll('input[name="day"]:checked')).map(day => day.value);
@@ -56,6 +74,29 @@ window.onload = function() {
     document.execCommand('copy');
     document.body.removeChild(copyText);
   });
+
+  // 時間設定
+  $timeList.addEventListener('click', function(e) {
+    e.target.
+  });
+}
+
+// 00から23までを取得
+const getHourArray = function () {
+  const hours = [];
+  for (let i = 0; i < 24; i++) {
+    hours.push(('0' + i).slice(-2));
+  }
+  return hours;
+}
+
+// 00から50までを取得
+const getMinuteArray = function () {
+  const minutes = [];
+  for (let i = 0; i < 60; i += 10) {
+    minutes.push(('0' + i).slice(-2));
+  }
+  return minutes;
 }
 
 // 日付を取得
@@ -72,7 +113,7 @@ const getDayArray = function () {
     days.push(date);
   }
   return days;
-} 
+}
 
 // 日付はYYYY/MM/DD（曜日）の形式で返す
 const formatDate = function (date) {

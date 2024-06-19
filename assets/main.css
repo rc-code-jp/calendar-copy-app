@@ -66,3 +66,21 @@
 .calendar-day-list .week-6 {
   color: #3643d6;
 }
+
+#time-list {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 1em;
+  gap: 1em;
+}
+
+#time-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+#time-list ul li {
+  list-style: none;
+}
+
+
