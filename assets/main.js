@@ -3,6 +3,15 @@ const weeks = ['日', '月', '火', '水', '木', '金', '土']
 const $calendar = document.querySelector('#calendar');
 const $output = document.querySelector('#output');
 
+// 今日の日付を判定する関数
+const isToday = function(date) {
+  const today = new Date();
+  return date.getFullYear() === today.getFullYear() &&
+         date.getMonth() === today.getMonth() &&
+         date.getDate() === today.getDate();
+};
+
+
 window.onload = function() {
   const dateArray = getDayArray();
 
@@ -25,7 +34,11 @@ window.onload = function() {
         <ul class="calendar-day-list">
           ${dateArrayMap[key].map(date => {
             const value = formatDate(date);
-            return `<li class="week-${date.getDay()}">
+            const isHoliday = isJapaneseHoliday(date);
+            const isTodayDate = isToday(date);
+            const holidayClass = isHoliday ? ' holiday' : '';
+            const todayClass = isTodayDate ? ' today' : '';
+            return `<li class="week-${date.getDay()}${holidayClass}${todayClass}">
               <label>
                 <input type="checkbox" name="day" value="${value}">
                 <span>${value}</span>

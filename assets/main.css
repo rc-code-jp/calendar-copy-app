@@ -66,3 +66,11 @@
 .calendar-day-list .week-6 {
   color: #3643d6;
 }
+
+.calendar-day-list .holiday {
+  color: #e93b3b;
+}
+
+.calendar-day-list .today {
+  color: #28a745;
+}
