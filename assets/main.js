@@ -72,7 +72,7 @@ const getDayArray = function () {
     days.push(date);
   }
   return days;
-} 
+}
 
 // 日付はYYYY/MM/DD（曜日）の形式で返す
 const formatDate = function (date) {
@@ -80,5 +80,5 @@ const formatDate = function (date) {
   // 日付が1桁の場合は0埋めする
   const m = ('0' +(date.getMonth() + 1)).slice(-2);
   const d = ('0' + date.getDate()).slice(-2);
-  return date.getFullYear() + '/' + m + '/' + d + '（' + weeks[weekNumber] + '）'
+  return m + '/' + d + '（' + weeks[weekNumber] + '）'
 }
